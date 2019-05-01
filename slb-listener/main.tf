@@ -9,7 +9,7 @@ data "terraform_remote_state" "slb" {
 }
 
 resource "alicloud_slb_listener" "slbl" {
-  count = "${var.use_redirect ? 0 : length(data.terraform_remote_state.slb.*.slb_ids)}"
+  count = "${var.use_redirect ? 0 : length(data.terraform_remote_state.slb.slb_ids)}"
 
   load_balancer_id          = "${data.terraform_remote_state.slb.slb_ids[count.index]}"
   acl_status                = "${var.slbl_acl_status}"
@@ -40,7 +40,7 @@ resource "alicloud_slb_listener" "slbl" {
 }
 
 resource "alicloud_slb_listener" "slbl_redirect" {
-  count = "${var.use_redirect ? length(data.terraform_remote_state.slb.*.slb_ids) : 0}"
+  count = "${var.use_redirect ? length(data.terraform_remote_state.slb.slb_ids) : 0}"
 
   load_balancer_id          = "${data.terraform_remote_state.slb.slb_ids[count.index]}"
   frontend_port             = "${var.slbl_frontend_port}"
