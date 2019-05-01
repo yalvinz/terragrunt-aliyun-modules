@@ -11,7 +11,7 @@ data "terraform_remote_state" "vsw" {
 resource "alicloud_slb" "slb" {
   count = "${var.slb_amount}"
 
-  name                 = "atf-${var.slb_name}"
+  name                 = "tf-${var.slb_name}"
   specification        = "${var.slb_specification}"
   bandwidth            = "${var.slb_bandwidth}"
   internet             = "${var.slb_internet}"
