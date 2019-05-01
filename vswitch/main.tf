@@ -7,11 +7,11 @@ resource "alicloud_vswitch" "vsw" {
   availability_zone = "${var.region}${lookup(var.vsw_vswitches[count.index], "zone")}"
 }
 
-resource "alicloud_route_table_attachment" "rtba" {
-  count = "${length(var.vsw_vswitches)}"
-
-  vswitch_id     = "${alicloud_vswitch.vsw.*.id[count.index]}"
-  route_table_id = "${lookup(var.vsw_vswitches[count.index], "rtb_id")}"
-
-  depends_on = ["alicloud_vswitch.vsw"]
-}
+#resource "alicloud_route_table_attachment" "rtba" {
+#  count = "${length(var.vsw_vswitches)}"
+#
+#  vswitch_id     = "${alicloud_vswitch.vsw.*.id[count.index]}"
+#  route_table_id = "${lookup(var.vsw_vswitches[count.index], "rtb_id")}"
+#
+#  depends_on = ["alicloud_vswitch.vsw"]
+#}
