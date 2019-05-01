@@ -9,7 +9,7 @@ data "terraform_remote_state" "slb" {
 }
 
 resource "alicloud_slb_server_group" "slbsg" {
-  count = "${length(data.terraform_remote_state.slb.*.slb_ids)}"
+  count = "${length(data.terraform_remote_state.slb.slb_ids)}"
 
   load_balancer_id = "${data.terraform_remote_state.slb.slb_ids[count.index]}"
   name             = "tf-${var.slbsg_name}"

@@ -19,7 +19,7 @@ data "terraform_remote_state" "slbsg" {
 }
 
 resource "alicloud_slb_rule" "slbr" {
-  count = "${length(data.terraform_remote_state.slb.*.slb_ids)}"
+  count = "${length(data.terraform_remote_state.slb.slb_ids)}"
 
   load_balancer_id = "${data.terraform_remote_state.slb.slb_ids[count.index]}"
   frontend_port    = "${var.slbr_frontend_port}"
